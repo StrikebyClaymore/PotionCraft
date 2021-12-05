@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/imgs/human_1.png" type="Texture" id=1]
+[ext_resource path="res://objects/Human.gd" type="Script" id=2]
+
+[node name="Human" type="TextureRect"]
+anchor_left = 0.136
+anchor_top = 0.295
+anchor_right = 0.312
+anchor_bottom = 0.738
+margin_left = -139.264
+margin_top = -177.0
+margin_right = -139.488
+margin_bottom = -178.8
+rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+dialog = "Привет. Я вчера слишком много посрал и теперь болит очко. Можно мне какое-ниубдь зелье? Заплачу 10 монет говна"

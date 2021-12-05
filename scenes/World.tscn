@@ -1,0 +1,602 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://objects/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://objects/InventorySlot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/imgs/Pot.png" type="Texture" id=3]
+[ext_resource path="res://objects/Ladle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/Character.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/World.gd" type="Script" id=6]
+[ext_resource path="res://scripts/Map.gd" type="Script" id=7]
+[ext_resource path="res://objects/Button2D.tscn" type="PackedScene" id=8]
+[ext_resource path="res://objects/MapPotion.tscn" type="PackedScene" id=9]
+[ext_resource path="res://resources/imgs/potion.png" type="Texture" id=10]
+[ext_resource path="res://objects/Herb.tscn" type="PackedScene" id=11]
+[ext_resource path="res://resources/fonts/arial.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://scripts/Trading.gd" type="Script" id=14]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.407843, 0.317647, 0.141176, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.686275, 0.596078, 0.415686, 1 )
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.694118, 0.619608, 0.419608, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.690196, 0.615686, 0.439216, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.596078, 0.482353, 0.235294, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_bottom = 32
+border_color = Color( 0.282353, 0.192157, 0.0745098, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.803922, 0.701961, 0.521569, 1 )
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 18
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 13 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 100.531, 10 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 399.481, 11.8746 )
+
+[sub_resource type="Curve2D" id=10]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 35.6481, 2.21671 )
+
+[node name="World" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="PotionCraft" type="Control" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Corner" type="Panel" parent="GUI/PotionCraft"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 363, 300 )
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Panel" parent="GUI/PotionCraft"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 363, 300 )
+mouse_filter = 2
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CraftField" type="Control" parent="GUI/PotionCraft"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 214.0
+margin_top = 8.0
+margin_right = -214.0
+margin_bottom = -180.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="GUI/PotionCraft/CraftField"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PotionInfo" type="Control" parent="GUI/PotionCraft"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -808.0
+margin_bottom = -180.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Panel" parent="GUI/PotionCraft/PotionInfo"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -206.0
+margin_right = 208.0
+margin_bottom = 206.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="GUI/PotionCraft/PotionInfo"]
+margin_left = 57.0
+margin_top = 213.0
+margin_right = 145.0
+margin_bottom = 334.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="GUI/PotionCraft/PotionInfo/Panel"]
+modulate = Color( 0, 0, 0, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = 10.0
+margin_right = -45.0
+margin_bottom = -56.0
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Identifying" type="Control" parent="GUI/PotionCraft/PotionInfo"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="GUI/PotionCraft/PotionInfo/Identifying"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 58.0
+margin_top = 223.383
+margin_right = 58.0
+margin_bottom = 223.383
+rect_scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GUI/PotionCraft/PotionInfo/Identifying"]
+margin_left = 58.0562
+margin_top = 316.724
+margin_right = 146.056
+margin_bottom = 340.724
+text = "Shit potion"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Accept" type="Button" parent="GUI/PotionCraft/PotionInfo/Identifying"]
+margin_left = 58.0
+margin_top = 334.0
+margin_right = 144.0
+margin_bottom = 355.0
+text = "Accept"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Instruments" type="Control" parent="GUI/PotionCraft"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -504.0
+margin_top = -180.0
+margin_right = 296.0
+margin_bottom = -8.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="GUI/PotionCraft/Instruments"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ToTrading" parent="GUI/PotionCraft" instance=ExtResource( 8 )]
+position = Vector2( 240, 220 )
+rotation = -1.5708
+
+[node name="Trading" type="Control" parent="GUI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+mouse_filter = 2
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Corner" type="Panel" parent="GUI/Trading"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 363, 300 )
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Panel" parent="GUI/Trading"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 363, 300 )
+mouse_filter = 2
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Humans" type="Control" parent="GUI/Trading"]
+anchor_left = 0.188
+anchor_top = 0.67
+anchor_right = 0.188
+anchor_bottom = 0.67
+margin_left = 7.48799
+margin_top = -2.0
+margin_right = 7.48799
+margin_bottom = -2.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Dialog" type="RichTextLabel" parent="GUI/Trading"]
+margin_left = 301.0
+margin_top = 93.0
+margin_right = 692.0
+margin_bottom = 203.0
+custom_styles/normal = SubResource( 6 )
+custom_fonts/normal_font = SubResource( 7 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Trading"]
+margin_left = 326.796
+margin_top = 211.0
+margin_right = 674.796
+margin_bottom = 279.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Sell" type="Button" parent="GUI/Trading/VBoxContainer"]
+margin_right = 348.0
+margin_bottom = 20.0
+text = "Sell"
+
+[node name="Haggle" type="Button" parent="GUI/Trading/VBoxContainer"]
+margin_top = 24.0
+margin_right = 348.0
+margin_bottom = 44.0
+text = "Haggle"
+
+[node name="End" type="Button" parent="GUI/Trading/VBoxContainer"]
+margin_top = 48.0
+margin_right = 348.0
+margin_bottom = 68.0
+text = "End"
+
+[node name="Panel" type="Panel" parent="GUI/Trading"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TradeZone" type="ColorRect" parent="GUI/Trading"]
+margin_left = 443.0
+margin_top = 562.0
+margin_right = 643.0
+margin_bottom = 570.0
+color = Color( 0.427451, 0.384314, 0.286275, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Position2D" type="Position2D" parent="GUI/Trading/TradeZone"]
+position = Vector2( 100, -24 )
+
+[node name="Area2D" type="Area2D" parent="GUI/Trading/TradeZone"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GUI/Trading/TradeZone/Area2D"]
+position = Vector2( 103.344, -2.67267 )
+shape = SubResource( 8 )
+
+[node name="ToCraft" parent="GUI/Trading" instance=ExtResource( 8 )]
+position = Vector2( 770, 260 )
+rotation = 1.5708
+
+[node name="PlayerInfo" type="Control" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 808.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -8.0
+mouse_filter = 2
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="GUI/PlayerInfo"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySort" type="HBoxContainer" parent="GUI/PlayerInfo"]
+margin_left = 18.0
+margin_top = 8.0
+margin_right = 190.0
+margin_bottom = 44.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="All" type="Button" parent="GUI/PlayerInfo/InventorySort"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+text = "All"
+
+[node name="Ingridients" type="Button" parent="GUI/PlayerInfo/InventorySort"]
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+text = "Ing"
+
+[node name="Potions" type="Button" parent="GUI/PlayerInfo/InventorySort"]
+margin_left = 88.0
+margin_right = 128.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+text = "Pot"
+
+[node name="Custom" type="Button" parent="GUI/PlayerInfo/InventorySort"]
+margin_left = 132.0
+margin_right = 172.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+text = "Cus"
+
+[node name="Inventory" type="Control" parent="GUI/PlayerInfo"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 48.0
+margin_right = -4.0
+margin_bottom = -4.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/PlayerInfo/Inventory"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 8.0
+margin_right = -8.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/PlayerInfo/Inventory/ScrollContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="GUI/PlayerInfo/Inventory/ScrollContainer/VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+custom_constants/hseparation = 16
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlot" parent="GUI/PlayerInfo/Inventory/ScrollContainer/VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+content_tscn = ExtResource( 11 )
+count = 3
+
+[node name="RoomsNode" type="Node2D" parent="GUI"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="PotionCraftRoom" type="Node2D" parent="GUI/RoomsNode"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="GUI/RoomsNode/PotionCraftRoom"]
+position = Vector2( 8, 420 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GUI/RoomsNode/PotionCraftRoom/StaticBody2D"]
+position = Vector2( 400.267, 159.77 )
+shape = SubResource( 9 )
+
+[node name="Map" type="Node2D" parent="GUI/RoomsNode/PotionCraftRoom"]
+position = Vector2( 214, 8 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Character" parent="GUI/RoomsNode/PotionCraftRoom/Map" instance=ExtResource( 5 )]
+
+[node name="Path2D" type="Path2D" parent="GUI/RoomsNode/PotionCraftRoom/Map"]
+curve = SubResource( 10 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Recipes" type="Node2D" parent="GUI/RoomsNode/PotionCraftRoom/Map"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MapPotion" parent="GUI/RoomsNode/PotionCraftRoom/Map/Recipes" instance=ExtResource( 9 )]
+position = Vector2( 357.32, 238.19 )
+
+[node name="MapPotion2" parent="GUI/RoomsNode/PotionCraftRoom/Map/Recipes" instance=ExtResource( 9 )]
+position = Vector2( 89.1905, 227.139 )
+type = 1
+
+[node name="Pot" type="Sprite" parent="GUI/RoomsNode/PotionCraftRoom"]
+position = Vector2( 466.69, 509.117 )
+scale = Vector2( 2, 2 )
+z_index = 2
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="PotArea" type="Area2D" parent="GUI/RoomsNode/PotionCraftRoom/Pot"]
+position = Vector2( -63.6888, -47.5016 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GUI/RoomsNode/PotionCraftRoom/Pot/PotArea"]
+polygon = PoolVector2Array( 27.9871, 13.5713, 28.6171, 18.9259, 14.4429, 41.9195, 16.0179, 61.1333, 32.0818, 78.4572, 97.4882, 78.5149, 111.772, 57.0385, 111.457, 37.1948, 98.8577, 17.666, 99.4876, 12.6263 )
+
+[node name="TopPartArea" type="Area2D" parent="GUI/RoomsNode/PotionCraftRoom/Pot" groups=[
+"pot",
+]]
+position = Vector2( -63.6888, -47.5016 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GUI/RoomsNode/PotionCraftRoom/Pot/TopPartArea"]
+position = Vector2( 63.6226, 15.4597 )
+rotation = -3.14159
+shape = SubResource( 11 )
+one_way_collision = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="GUI/RoomsNode/PotionCraftRoom/Pot"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GUI/RoomsNode/PotionCraftRoom/Pot/StaticBody2D"]
+polygon = PoolVector2Array( -36.5428, -30.2176, -48.5636, -12.3631, -48.3869, 12.0321, -31.0627, 31.1239, 34.1678, 30.4168, 46.0119, 16.0979, 49.3707, -4.05464, 35.5821, -30.2176, 35.0518, -34.9906, 29.3553, -34.8969, 29.9166, -29.4249, 46.1887, -3.52431, 42.6531, 14.3302, 31.8698, 27.4116, -28.9414, 27.7652, -45.2049, 10.2643, -44.6746, -12.3631, -30.8367, -29.4249, -29.7142, -35.3178, -36.7196, -35.1673 )
+
+[node name="Ladle" parent="GUI/RoomsNode/PotionCraftRoom" groups=[
+"ladle",
+] instance=ExtResource( 4 )]
+position = Vector2( 438.77, 330.388 )
+
+[node name="TradingRoom" type="Node2D" parent="GUI/RoomsNode"]
+visible = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="GUI/RoomsNode/TradingRoom"]
+position = Vector2( 8, 420 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GUI/RoomsNode/TradingRoom/StaticBody2D"]
+position = Vector2( 400.267, 159.77 )
+shape = SubResource( 9 )
+
+[connection signal="pressed" from="GUI/PotionCraft/PotionInfo/Identifying/Accept" to="." method="_on_Accept_pressed"]
+[connection signal="pressed" from="GUI/PotionCraft/ToTrading" to="." method="_on_ToTrading_pressed"]
+[connection signal="pressed" from="GUI/Trading/VBoxContainer/Sell" to="GUI/Trading" method="_on_Sell_pressed"]
+[connection signal="pressed" from="GUI/Trading/VBoxContainer/Haggle" to="GUI/Trading" method="_on_Haggle_pressed"]
+[connection signal="pressed" from="GUI/Trading/VBoxContainer/End" to="GUI/Trading" method="_on_End_pressed"]
+[connection signal="body_entered" from="GUI/Trading/TradeZone/Area2D" to="GUI/Trading" method="_on_Area2D_body_entered"]
+[connection signal="pressed" from="GUI/Trading/ToCraft" to="." method="_on_ToCraft_pressed"]
